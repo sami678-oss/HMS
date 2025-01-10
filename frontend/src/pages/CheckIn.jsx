@@ -1,14 +1,19 @@
 import React from "react";
+import "./Checkin.css";
 
 const Checkin = () => {
-  return <div>Checkin
-    <form action="" className="flex flex-col h-[500px] w-[400px] border-[1px] border-black">
-      <h1 >LOGIN</h1>
-      <input type="text" name="text" placeholder="Enter your id" />
-      <input type="submit" value="Confirm"/>
-    </form>
-  </div>;
+    return (
+        <div className="checkin-page">
+            <div className="checkin-form-container">
+                <form className="checkin-form">
+                    <h2>Login</h2>
+                    <input type="text" placeholder="Teczite Id "/>
+                
+                    <button type="submit">Confirm</button>
+                </form>
+            </div>
+        </div>
+    );
 };
 
 export default Checkin;
-
