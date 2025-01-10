@@ -1,0 +1,63 @@
+
+   .dashboard {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: transparent; /* Make the background transparent */
+    color: #fff; /* Ensure text is visible on the image */
+}
+
+.dashboard-header h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-box {
+    flex: 1;
+    /* background: rgba(255, 255, 255, 0.2); */
+     /* Semi-transparent background for glass effect */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(3.5px); 
+    /* Blur effect for glassmorphism */
+    color: #000; /* Text color for contrast */
+    border: 0.5px solid #fff;
+
+}
+
+.stat-box h2 {
+    font-size: 18px;
+    color: #f8f9fa; /* Adjust text color for better visibility */
+    margin-bottom: 10px;
+}
+
+.stat-box p {
+    font-size: 14px;
+    color: #dcdde1; /* Adjust text color for better visibility */
+    margin-bottom: 15px;
+}
+
+.stat-box h1 {
+    font-size: 36px;
+    margin: 0;
+}
+
+.stat-box.rooms {
+  /* background: rgba(255, 255, 255, 0.2);  */
+  /* Same semi-transparent background as other boxes */
+  color: #000; /* Text color for consistency */
+  border: 0.5px solid #fff; /* Adjusted border color */
+  backdrop-filter: blur(3.5px); /* Ensure the glassmorphism effect */
+}
+
+
+   
+
+
+
