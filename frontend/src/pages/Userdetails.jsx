@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,14 +19,14 @@ const UserDetails = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const { id } = userData;
 
     // Validate ID format: Starts with TZ2K25 and length <= 10 characters
-     const idPattern = /^TZ2K25[A-Z0-9]{4}$/;
+    const idPattern = /^TZ2K25[A-Z0-9]{4}$/;
 
     if (!idPattern.test(id)) {
-      // Invalid ID toast
       toast.error("Invalid ID! The ID should start with 'TZ2K25' and be 10 characters long.", {
         position: "top-right",
         autoClose: 3000,
@@ -34,35 +35,38 @@ const UserDetails = () => {
       return;
     }
 
-    // Check if the entered ID matches the mock data ID
-    if (id === mockData.id) {
-      // Valid data toast
-      toast.success("Valid data retrieved successfully!", {
-        position: "top-right",
-        autoClose: 3000,
+    try {
+      // Make a POST request to the backend to check if the ID exists
+      const response = await fetch("http://localhost:4001/user/checkTzkid", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tzkid: id }),
       });
-      setRetrievedData(mockData); // Set retrieved data
-    } else {
-      // Data not found toast
-      toast.error("No data found for the entered ID.", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      setRetrievedData(null); // Clear any previously retrieved data
-    }
-   
 
-    // Simulate fetching data based on ID
-    const fetchedData = {
-      id: userData.id,
-      name: "John Doe",
-      hostel:"I3",
-      gender:"male",
-      roomNo: "101",
-      checkIn: "2025-01-10",
-      checkOut: "2025-01-15",
-    };
-    setRetrievedData(fetchedData);
+      const data = await response.json();
+
+      if (response.ok) {
+        setRetrievedData(data.user);
+        toast.success("User Found!", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      } else {
+        setRetrievedData(null);
+        toast.error(data.message || "User not found", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
   };
 
   return (
@@ -90,10 +94,11 @@ const UserDetails = () => {
 
           {retrievedData && (
             <div className="retrieved-data">
-              <p><strong>Name:</strong> {retrievedData.name}</p>
-              <p><strong>Room No:</strong> {retrievedData.roomNo}</p>
-              <p><strong>CheckIn:</strong> {retrievedData.checkIn}</p>
-              <p><strong>CheckOut:</strong> {retrievedData.checkOut}</p>
+              <p><strong>First Name:</strong> {retrievedData.firstName}</p>
+              <p><strong>Last Name:</strong> {retrievedData.lastName}</p>
+              <p><strong>Email:</strong> {retrievedData.email}</p>
+              <p><strong>Gender:</strong> {retrievedData.gender}</p>
+              {/* Add other fields as needed */}
             </div>
           )}
         </form>
@@ -103,3 +108,4 @@ const UserDetails = () => {
 };
 
 export default UserDetails;
+

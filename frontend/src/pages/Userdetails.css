@@ -15,8 +15,8 @@ input.invalid {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: url("./public/background-2.jpg") no-repeat center center fixed;
+  min-height: 80vh;
+  /* background: url("./public/background-2.jpg") no-repeat center center fixed; */
   background-size: cover;
   color: #fff;
 }
@@ -27,6 +27,7 @@ input.invalid {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   width: 400px;
+  
 }
 
 .userdetails-form h2 {
@@ -39,6 +40,7 @@ input.invalid {
   flex-direction: column;
   sligh-items:center;
   margin-bottom:20px;
+
 }
 
 .form-group label {
@@ -65,6 +67,9 @@ font-size: 16px;
   font-size: 16px;
   transition: all 0.3s ease;
   width: 100%;
+  margin-top:10px;
+
+  
 }
 
 .submit-button:hover {
