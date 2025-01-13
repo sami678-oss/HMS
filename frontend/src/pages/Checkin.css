@@ -52,4 +52,26 @@
     transform: scale(1.05);
     transition: all 0.3s ease;
 }
+.allocation-details {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #7A27C8; /* Add a border color for visibility */
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8); /* Light background for contrast */
+    color: #333; /* Dark text color for readability */
+    text-align: left;
+}
 
+.allocation-details h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333; /* Ensure the title is distinct */
+}
+
+.allocation-details p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+  

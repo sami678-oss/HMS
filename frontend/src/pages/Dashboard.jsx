@@ -3,11 +3,11 @@ import "./Dashboard.css";
 
 const Dashboard = () => {
   const data = {
-    arrivals: 54,
-    departures: 12,
-    roomsOccupied: 50,
-    hostel1Available: 5,
-    hostel2Available: 8,
+    arrivals: 0,
+    departures: 0,
+    roomsOccupied: 0,
+    hostel1Available: 0,
+    hostel2Available: 0,
   };
 
   return (

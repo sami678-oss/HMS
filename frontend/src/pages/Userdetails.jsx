@@ -24,10 +24,10 @@ const UserDetails = () => {
     const { id } = userData;
 
     // Validate ID format: Starts with TZ2K25 and length <= 10 characters
-    const idPattern = /^TZ2K25[A-Z0-9]{4}$/;
+    const idPattern = /^TZ2K25[A-Z0-9]*$/;
 
     if (!idPattern.test(id)) {
-      toast.error("Invalid ID! The ID should start with 'TZ2K25' and be 10 characters long.", {
+      toast.error("Invalid ID! The ID should start with 'TZ2K25' ", {
         position: "top-right",
         autoClose: 3000,
       });
@@ -37,22 +37,29 @@ const UserDetails = () => {
 
     try {
       // Make a POST request to the backend to check if the ID exists
-      const response = await fetch("http://localhost:4001/user/checkTzkid", {
-        method: "POST",
+      const response = await fetch(`http://localhost:4001/user/${id}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ tzkid: id }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
         setRetrievedData(data.user);
-        toast.success("User Found!", {
-          position: "top-right",
-          autoClose: 3000,
-        });
+
+        if (data.user.firstName === "Default") {
+          toast.info("Default user details displayed.", {
+            position: "top-right",
+            autoClose: 3000,
+          });
+        } else {
+          toast.success("User Found!", {
+            position: "top-right",
+            autoClose: 3000,
+          });
+        }
       } else {
         setRetrievedData(null);
         toast.error(data.message || "User not found", {
@@ -108,4 +115,3 @@ const UserDetails = () => {
 };
 
 export default UserDetails;
-
