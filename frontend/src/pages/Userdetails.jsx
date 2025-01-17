@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -37,7 +36,7 @@ const UserDetails = () => {
 
     try {
       // Make a POST request to the backend to check if the ID exists
-      const response = await fetch(`http://localhost:4001/user/${id}`, {
+      const response = await fetch(`http://localhost:4001/api/users/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -101,10 +100,21 @@ const UserDetails = () => {
 
           {retrievedData && (
             <div className="retrieved-data">
-              <p><strong>First Name:</strong> {retrievedData.firstName}</p>
-              <p><strong>Last Name:</strong> {retrievedData.lastName}</p>
-              <p><strong>Email:</strong> {retrievedData.email}</p>
-              <p><strong>Gender:</strong> {retrievedData.gender}</p>
+              <p>
+                <strong>First Name:</strong> {retrievedData.firstName}
+              </p>
+              <p>
+                <strong>Last Name:</strong> {retrievedData.lastName}
+              </p>
+              <p>
+                <strong>Email:</strong> {retrievedData.email}
+              </p>
+              <p>
+                <strong>Gender:</strong> {retrievedData.gender}
+              </p>
+              <p>
+                <strong>Check-in Time:</strong> {new Date(retrievedData.allocationTime).toLocaleString()}
+              </p>
               {/* Add other fields as needed */}
             </div>
           )}
