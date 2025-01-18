@@ -363,7 +363,7 @@ const Checkin = ({ setDashboardStats }) => {
             onChange={(e) => setTzkid(e.target.value)}
             required
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Check In</button>
         </form>
 
         {allocation && (

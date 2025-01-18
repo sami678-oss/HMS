@@ -113,7 +113,10 @@ const UserDetails = () => {
                 <strong>Gender:</strong> {retrievedData.gender}
               </p>
               <p>
-                <strong>Check-in Time:</strong> {new Date(retrievedData.allocationTime).toLocaleString()}
+                <strong>Check-In Time:</strong> {new Date(retrievedData.CheckInTime).toLocaleString()}
+              </p>
+              <p>
+                <strong>Check-Out Time:</strong> {new Date(retrievedData.CheckOutTime).toLocaleString()}
               </p>
               {/* Add other fields as needed */}
             </div>

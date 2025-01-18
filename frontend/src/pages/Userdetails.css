@@ -10,7 +10,6 @@ input.invalid {
   background-color: #ffe6e6;
 }
 
-
 .userdetails-page {
   display: flex;
   justify-content: center;
@@ -18,33 +17,37 @@ input.invalid {
   min-height: 80vh;
   /* background: url("./public/background-2.jpg") no-repeat center center fixed; */
   background-size: cover;
+  color: #000;
+}
+.userdetails-page h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
   color: #fff;
 }
-
 .userdetails-form-container {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.1);
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   width: 400px;
-  
+  border: 1px solid;
 }
 
 .userdetails-form h2 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 25px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  sligh-items:center;
-  margin-bottom:20px;
-
+  sligh-items: center;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-font-size: 16px;
+  font-size: 16px;
   color: #ffffff; /* White text color */
   margin-right: 10px; /* Add space between label and input */
   width: 50px;
@@ -59,7 +62,7 @@ font-size: 16px;
 
 .submit-button {
   padding: 10px;
-  background-color: #417fae;
+  background-color: #7a27c8;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -67,18 +70,16 @@ font-size: 16px;
   font-size: 16px;
   transition: all 0.3s ease;
   width: 100%;
-  margin-top:10px;
-
-  
+  margin-top: 10px;
 }
 
 .submit-button:hover {
-  background-color: #315c81;
+  background-color: #7a27c8;
 }
 
 .retrieved-data {
   margin-top: 20px;
-  border: 1px solid #fff;
+  border: 1px solid #000;
   padding: 10px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.2);
@@ -104,10 +105,5 @@ input[type="text"]::placeholder {
 
 input[type="text"]:focus {
   outline: none;
-  border: 1px solid #417FAE; /* Highlighted border on focus */
+  border: 1px solid #7a27c8; /* Highlighted border on focus */
 }
-
-
-
-
-
