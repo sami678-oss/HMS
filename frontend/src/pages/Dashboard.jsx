@@ -159,36 +159,34 @@
 
 // export default Dashboard;
 
-
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { details } from "../../../HMSBackend/controllers/userControllers";
 
-const Dashboard = () => {
-  const [stats, setStats] = useState([]);
+const Dashboard = (props) => {
+  // const [stats, setStats] = useState([]);
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:4001/api/users/stats"
-        );
-        console.log(response.data);
+  // useEffect(() => {
+  //   const fetchStats = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://localhost:4001/api/users/stats"
+  //       );
+  //       console.log(response.data);
 
-        setStats(response.data);
-      } catch (error) {
-        console.error("Error fetching stats:", error);
-      }
-    };
+  //       setStats(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching stats:", error);
+  //     }
+  //   };
 
-    fetchStats();
-  }, []);
+  //   fetchStats();
+  // }, []);
 
   return (
     <div>
       <h1>Dashboard</h1>
-      {stats ? (
+      {/* {stats ? (
         <div>
           <p>Total Rooms: {stats.totalRooms}</p>
           <p>Total Beds: {stats.totalBeds}</p>
@@ -198,12 +196,11 @@ const Dashboard = () => {
         </div>
       ) : (
         <p>Loading...</p>
-      )}
+      )} */}
+
+      <p>Total Rooms: {details}</p>
     </div>
   );
 };
 
 export default Dashboard;
-
-
-
