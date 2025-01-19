@@ -243,6 +243,9 @@
 // export default Checkin;
 
 
+
+
+
 import React, { useState } from "react";
 import "./Checkin.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -279,7 +282,7 @@ const Checkin = ({ setDashboardStats }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ tzkid }),
+        body: JSON.stringify({ tzkid, action: "checkin" }),
       });
 
       const data = await response.json();
@@ -380,7 +383,6 @@ const Checkin = ({ setDashboardStats }) => {
             </p>
           </div>
         )}
-
       </div>
     </div>
   );

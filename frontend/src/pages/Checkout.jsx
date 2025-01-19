@@ -15,7 +15,7 @@ const Checkout = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ tzkid }),
+        body: JSON.stringify({ tzkid, action: "checkout" }),
       });
 
       const data = await response.json();
