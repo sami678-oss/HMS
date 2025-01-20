@@ -9,18 +9,18 @@ const Dashboard = ({ stats }) => {
 
   // State for recent check-ins
   const [recentCheckIns, setRecentCheckIns] = useState([
-    {
-      teckId: "T12345",
-      guestName: "John Doe",
-      gender: "Male",
-      checkInDate: "2025-01-19",
-    },
-    {
-      teckId: "T67890",
-      guestName: "Jane Smith",
-      gender: "Female",
-      checkInDate: "2025-01-18",
-    },
+    // {
+    //   teckId: "T12345",
+    //   guestName: "John Doe",
+    //   gender: "Male",
+    //   checkInDate: "2025-01-19",
+    // },
+    // {
+    //   teckId: "T67890",
+    //   guestName: "Jane Smith",
+    //   gender: "Female",
+    //   checkInDate: "2025-01-18",
+    // },
   ]);
 
   return (

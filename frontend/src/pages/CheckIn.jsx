@@ -373,6 +373,7 @@ const Checkin = ({ setDashboardStats }) => {
           <div className="allocation-details">
             <h3>Allocation Details</h3>
             <p>
+              
               <strong>Hostel:</strong> {allocation.hostel}
             </p>
             <p>
