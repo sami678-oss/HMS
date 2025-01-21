@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Checkout = () => {
   const [tzkid, setTzkid] = useState("");
-  const [gender, setGender] = useState(""); 
+  const [gender, setGender] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,11 +15,11 @@ const Checkout = () => {
         position: "top-right",
         autoClose: 3000,
       });
-      return; 
+      return;
     }
 
-    if (!["male", "female"].includes(gender.toLowerCase())) {
-      toast.error("Invalid gender. Please enter 'male' or 'female'.", {
+    if (!gender) {
+      toast.error("Please select a gender.", {
         position: "top-right",
         autoClose: 3000,
       });
@@ -46,6 +46,7 @@ const Checkout = () => {
           autoClose: 3000,
         });
         setTzkid("");
+        setGender("");
       } else {
         toast.error(data.message || "Checkout failed.", {
           position: "top-right",
@@ -74,13 +75,22 @@ const Checkout = () => {
             onChange={(e) => setTzkid(e.target.value)}
             required
           />
-          <input
-            type="text"
-            placeholder="Enter Gender (male/female)"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            required
-          />
+          <div className="gender-selection">
+            <ul>
+              <li
+                className={`gender-option ${gender === "male" ? "selected" : ""}`}
+                onClick={() => setGender("male")}
+              >
+                Male
+              </li>
+              <li
+                className={`gender-option ${gender === "female" ? "selected" : ""}`}
+                onClick={() => setGender("female")}
+              >
+                Female
+              </li>
+            </ul>
+          </div>
           <button type="submit">Check Out</button>
         </form>
       </div>

@@ -1,80 +1,146 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+/* Background */
+
+/* Container */
 .checkin-form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
-  color: #fff;
+  height: 100vh;
 }
 
+/* Form Styling */
 .checkin-form {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 40px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 35px 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   text-align: center;
-  backdrop-filter: blur(4px);
-  width: 300px;
-  border: 1px solid;
+  width: 380px;
+  border: 1px solid #fff;
+  animation: fadeIn 1s ease-in-out;
+  transition: all 0.3s ease; /* Added transition for smooth hover effect */
 }
 
+.checkin-form:hover {
+  transform: scale(1.05); /* Scale the form slightly on hover */
+  border: 2px solid #0341a5; /* Light blue border on hover */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); /* Stronger shadow on hover */
+}
+
+/* Title */
 .checkin-form h2 {
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 26px;
+  font-weight: bold;
   color: #fff;
-  /* text-shadow: 0 0 5px #000; */
+  text-shadow: 0 0 10px #000;
+  text-transform: uppercase;
 }
 
+/* Input Styling */
 .checkin-form input {
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.5);
   outline: none;
-  background: transparent;
-  color: #000;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 16px;
+  transition: 0.3s ease;
 }
 
+.checkin-form input:focus {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #4c91ff; /* Light blue border on focus */
+}
+
+/* Gender Selection */
+.gender-selection ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.gender-option {
+  padding: 12px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+.gender-option:hover,
+.gender-option.selected {
+  background: #03265f; /* Light blue background on hover */
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Button */
 .checkin-form button {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   border: none;
-  border-radius: 10px;
-  background-color: #7a27c8;
+  border-radius: 8px;
+  background-color: #03265f; /* Light blue */
   color: #fff;
   font-weight: bold;
   cursor: pointer;
+  transition: transform 0.3s ease;
+  font-size: 18px;
 }
 
 .checkin-form button:hover {
-  /* background-color: #; */
   transform: scale(1.05);
-  transition: all 0.3s ease;
+  background-color: #357ab7; /* Slightly darker blue on hover */
 }
+
+/* Allocation Details */
 .allocation-details {
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #7a27c8; /* Add a border color for visibility */
-  border-radius: 10px;
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.8
-  ); /* Light background for contrast */
-  color: #333; /* Dark text color for readability */
-  text-align: left;
+  margin-top: 30px;
+  padding: 25px;
+  border: 1px solid #fff;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
 }
 
 .allocation-details h3 {
-  margin-bottom: 15px;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
-  color: #333; /* Ensure the title is distinct */
+  color: #4cccff; /* Light blue */
 }
 
 .allocation-details p {
-  margin: 10px 0;
-  font-size: 16px;
-  color: #333;
+  margin: 8px 0;
+  font-size: 18px;
+  color: #555;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
