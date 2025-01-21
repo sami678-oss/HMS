@@ -48,8 +48,8 @@ input.invalid {
 
 .form-group label {
   font-size: 16px;
-  color: #ffffff; /* White text color */
-  margin-right: 10px; /* Add space between label and input */
+  color: #ffffff; 
+  margin-right: 10px; 
   width: 50px;
 }
 

@@ -5,18 +5,38 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Checkout = () => {
   const [tzkid, setTzkid] = useState("");
+  const [gender, setGender] = useState(""); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:4001/api/users/allocate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ tzkid, action: "checkout" }),
+    if (!/^TZ2K25/.test(tzkid)) {
+      toast.error("Invalid tzkid. It must start with 'TZ2K25'.", {
+        position: "top-right",
+        autoClose: 3000,
       });
+      return; 
+    }
+
+    if (!["male", "female"].includes(gender.toLowerCase())) {
+      toast.error("Invalid gender. Please enter 'male' or 'female'.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:4001/api/students/allocate",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ tzkid, gender, action: "checkout" }),
+        }
+      );
 
       const data = await response.json();
 
@@ -52,6 +72,13 @@ const Checkout = () => {
             placeholder="Enter TZKID"
             value={tzkid}
             onChange={(e) => setTzkid(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Enter Gender (male/female)"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
             required
           />
           <button type="submit">Check Out</button>

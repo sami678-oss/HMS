@@ -1,61 +1,87 @@
 
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 
-const Dashboard = ({ stats }) => {
-  const boysHostel = stats.boysHostel || {};
-  const girlsHostel = stats.girlsHostel || {};
-  const totalArrivals = (boysHostel.arrivals || 0) + (girlsHostel.arrivals || 0);
+const Dashboard = () => {
+  const [stats, setStats] = useState({
+   
+  });
+  const [recentCheckIns, setRecentCheckIns] = useState([]);
 
-  // State for recent check-ins
-  const [recentCheckIns, setRecentCheckIns] = useState([
-    // {
-    //   teckId: "T12345",
-    //   guestName: "John Doe",
-    //   gender: "Male",
-    //   checkInDate: "2025-01-19",
-    // },
-    // {
-    //   teckId: "T67890",
-    //   guestName: "Jane Smith",
-    //   gender: "Female",
-    //   checkInDate: "2025-01-18",
-    // },
-  ]);
+  useEffect(() => {
+    const fetchHostelStats = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:4001/api/rooms/hostel-stats"
+        );
+        const data = await response.json();
+        console.log({data}); 
+
+        setStats(data);
+        console.log({stats}); 
+
+
+        setRecentCheckIns([
+          {
+            teckId: "TZ2K25V001",
+            guestName: "John Doe",
+            gender: "Male",
+            checkInDate: "2025-01-21",
+          },
+          {
+            teckId: "TZ2K25V002",
+            guestName: "Jane Smith",
+            gender: "Female",
+            checkInDate: "2025-01-20",
+          },
+        ]);
+      } catch (error) {
+        console.error("Error fetching hostel stats:", error);
+      }
+    };
+
+    fetchHostelStats();
+  }, []);
+
+  const boysHostel = stats?.boysHostel || {};
+  const girlsHostel = stats?.girlsHostel || {};
+  const totalArrivals =
+    (boysHostel.totalStudents || 0) + (girlsHostel.totalStudents || 0);
 
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-title">Dashboard</h1>
 
       <div className="main-dashboard">
-        {/* Left Section: Stats */}
+
         <div className="stats-section">
           <div className="stat-box">
-            <h2>Arrivals</h2>
+            <h2>Total Students</h2>
             <h1>{totalArrivals}</h1>
           </div>
           <div className="stat-box">
-            <h2>Departures</h2>
-            <h1>{boysHostel.departures || 0}</h1>
+            <h2>Boys Rooms</h2>
+            <h1>{boysHostel.totalRooms || 0}</h1>
           </div>
           <div className="stat-box">
-            <h2>Rooms Occupied</h2>
-            <h1>{boysHostel.roomsOccupied || 0}</h1>
+            <h2>Girls Rooms</h2>
+            <h1>{girlsHostel.totalRooms || 0}</h1>
           </div>
         </div>
 
         {/* Right Section: Activities */}
         <div className="activities-section">
-          <h2 className="activities-title">Today's Activities</h2>
+          <h2 className="activities-title">Hostel Occupancy</h2>
           <div className="activity-circle">
             <h3>I3</h3>
-            <h1>{boysHostel.roomsOccupied || 0}</h1>
-            <p>Rooms Occupied</p>
+            <h1>{boysHostel.totalStudents || 0}</h1>
+            <p>Total Students</p>
           </div>
           <div className="activity-circle">
             <h3>K4</h3>
-            <h1>{girlsHostel.roomsOccupied || 0}</h1>
-            <p>Rooms Occupied</p>
+            <h1>{girlsHostel.totalStudents || 0}</h1>
+            <p>Total Students</p>
           </div>
         </div>
       </div>
@@ -84,7 +110,6 @@ const Dashboard = ({ stats }) => {
           </tbody>
         </table>
       </div>
-
     </div>
   );
 };

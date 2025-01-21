@@ -22,7 +22,6 @@ const UserDetails = () => {
     e.preventDefault();
     const { id } = userData;
 
-    // Validate ID format: Starts with TZ2K25 and length <= 10 characters
     const idPattern = /^TZ2K25[A-Z0-9]*$/;
 
     if (!idPattern.test(id)) {
@@ -30,13 +29,12 @@ const UserDetails = () => {
         position: "top-right",
         autoClose: 3000,
       });
-      setRetrievedData(null); // Clear any previously retrieved data
+      setRetrievedData(null);
       return;
     }
 
     try {
-      // Make a POST request to the backend to check if the ID exists
-      const response = await fetch(`http://localhost:4001/api/users/${id}`, {
+      const response = await fetch(`http://localhost:4001/api/students/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -47,18 +45,10 @@ const UserDetails = () => {
 
       if (response.ok) {
         setRetrievedData(data.user);
-
-        if (data.user.firstName === "Default") {
-          toast.info("Default user details displayed.", {
-            position: "top-right",
-            autoClose: 3000,
-          });
-        } else {
-          toast.success("User Found!", {
-            position: "top-right",
-            autoClose: 3000,
-          });
-        }
+        toast.success("User Found!", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       } else {
         setRetrievedData(null);
         toast.error(data.message || "User not found", {
@@ -101,26 +91,39 @@ const UserDetails = () => {
           {retrievedData && (
             <div className="retrieved-data">
               <p>
-                <strong>First Name:</strong> {retrievedData.firstName}
-              </p>
-              <p>
-                <strong>Last Name:</strong> {retrievedData.lastName}
-              </p>
-              <p>
-                <strong>Email:</strong> {retrievedData.email}
+                <strong>Name:</strong> {retrievedData.name || "STUDENT CHECKOUT"}
               </p>
               <p>
                 <strong>Gender:</strong> {retrievedData.gender}
               </p>
               <p>
+                <strong>Hostel:</strong> {retrievedData.hostel || "STUDENT CHECKOUT"}
+              </p>
+              <p>
+                <strong>Room:</strong> {retrievedData.room || "STUDENT CHECKOUT"}
+              </p>
+              <p>
+                <strong>Bed:</strong> {retrievedData.bed || "STUDENT CHECKOUT"}
+              </p>
+              <p>
                 <strong>Check-In Time:</strong>{" "}
-                {new Date(retrievedData.CheckInTime).toLocaleString()}
+                {retrievedData.checkInTime
+                  ? new Date(retrievedData.checkInTime).toLocaleString("en-IN", {
+                      timeZone: "Asia/Kolkata",
+                    })
+                  : "N/A"}
               </p>
               <p>
                 <strong>Check-Out Time:</strong>{" "}
-                {new Date(retrievedData.CheckOutTime).toLocaleString()}
+                {retrievedData.checkOutTime
+                  ? new Date(retrievedData.checkOutTime).toLocaleString(
+                      "en-IN",
+                      {
+                        timeZone: "Asia/Kolkata",
+                      }
+                    )
+                  : "N/A"}
               </p>
-              {/* Add other fields as needed */}
             </div>
           )}
         </form>
