@@ -104,10 +104,10 @@ const Checkin = ({ setDashboardStats }) => {
               <strong>Hostel:</strong> {allocation.hostel}
             </p>
             <p className="text-gray-300">
-              <strong>Room No:</strong> {allocation.roomNo}
+              <strong>Room No:</strong> {allocation.room}
             </p>
             <p className="text-gray-300">
-              <strong>Bed No:</strong> {allocation.bedNo}
+              <strong>Bed No:</strong> {allocation.bed}
             </p>
           </motion.div>
         )}

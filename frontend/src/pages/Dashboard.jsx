@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 
@@ -10,7 +9,12 @@ const Dashboard = () => {
     const fetchHostelStats = async () => {
       try {
         const response = await fetch("http://localhost:4001/api/rooms/hostel-stats")
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+
         const data = await response.json()
+        console.log(data)
         setStats(data)
 
         setRecentCheckIns([
@@ -35,8 +39,8 @@ const Dashboard = () => {
     fetchHostelStats()
   }, [])
 
-  const boysHostel = stats?.boysHostel || {}
-  const girlsHostel = stats?.girlsHostel || {}
+  const boysHostel = stats?.boy || {}
+  const girlsHostel = stats?.girl || {}
   const totalArrivals = (boysHostel.totalStudents || 0) + (girlsHostel.totalStudents || 0)
 
   return (
@@ -59,9 +63,9 @@ const Dashboard = () => {
         >
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { title: "Total Students", value: totalArrivals },
-              { title: "Boys Rooms", value: boysHostel.totalRooms || 0 },
-              { title: "Girls Rooms", value: girlsHostel.totalRooms || 0 },
+              { title: "Total Students Arrived", value: totalArrivals },
+              { title: "Boys Rooms Filled", value: boysHostel.filledRooms || 0 },
+              { title: "Girls Rooms Filled", value: girlsHostel.filledRooms || 0 },
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -82,7 +86,7 @@ const Dashboard = () => {
           className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg"
         >
           <h2 className="text-2xl font-bold mb-4">Hostel Occupancy</h2>
-          <div className="flex justify-around ">
+          <div className="flex justify-around">
             {[
               { title: "I3", value: boysHostel.totalStudents || 0 },
               { title: "K4", value: girlsHostel.totalStudents || 0 },
@@ -140,4 +144,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard
-
