@@ -1,36 +1,39 @@
-import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./UserDetails.css";
+"use client"
+
+import React, { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 
 const UserDetails = () => {
   const [userData, setUserData] = useState({
     id: "",
-  });
+  })
 
-  const [retrievedData, setRetrievedData] = useState(null);
+  const [retrievedData, setRetrievedData] = useState(null)
+  const [toast, setToast] = useState(null)
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setUserData((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
-  };
+    }))
+  }
+
+  const showToast = (message, type) => {
+    setToast({ message, type })
+    setTimeout(() => setToast(null), 3000)
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { id } = userData;
+    e.preventDefault()
+    const { id } = userData
 
-    const idPattern = /^TZ2K25[A-Z0-9]*$/;
+    const idPattern = /^TZ2K25[A-Z0-9]*$/
 
     if (!idPattern.test(id)) {
-      toast.error("Invalid ID! The ID should start with 'TZ2K25' ", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      setRetrievedData(null);
-      return;
+      showToast("Invalid ID! The ID should start with 'TZ2K25'", "error")
+      setRetrievedData(null)
+      return
     }
 
     try {
@@ -39,39 +42,34 @@ const UserDetails = () => {
         headers: {
           "Content-Type": "application/json",
         },
-      });
+      })
 
-      const data = await response.json();
+      const data = await response.json()
 
       if (response.ok) {
-        setRetrievedData(data.user);
-        toast.success("User Found!", {
-          position: "top-right",
-          autoClose: 3000,
-        });
+        setRetrievedData(data.user)
+        showToast("User Found!", "success")
       } else {
-        setRetrievedData(null);
-        toast.error(data.message || "User not found", {
-          position: "top-right",
-          autoClose: 3000,
-        });
+        setRetrievedData(null)
+        showToast(data.message || "User not found", "error")
       }
     } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong. Please try again.", {
-        position: "top-right",
-        autoClose: 3000,
-      });
+      console.error(error)
+      showToast("Something went wrong. Please try again.", "error")
     }
-  };
+  }
 
   return (
-    <div className="userdetails-page">
-      <ToastContainer />
-      <div className="userdetails-form-container">
-        <form className="userdetails-form" onSubmit={handleSubmit}>
-          <h2>User Details</h2>
-          <div className="form-group">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 p-4">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-md overflow-hidden rounded-lg bg-gray-800 bg-opacity-50 p-8 shadow-lg backdrop-blur-lg"
+      >
+        <h2 className="mb-6 text-center text-3xl font-bold text-white">User Details</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
             <input
               type="text"
               id="id"
@@ -80,16 +78,28 @@ const UserDetails = () => {
               value={userData.id}
               onChange={handleInputChange}
               required
+              className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
             />
           </div>
-          <div className="form-group">
-            <button type="submit" className="submit-button">
-              Submit
-            </button>
-          </div>
+          <motion.button
+            type="submit"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full rounded-md bg-blue-600 py-2 font-medium text-white transition-colors hover:bg-blue-700"
+          >
+            Submit
+          </motion.button>
+        </form>
 
+        <AnimatePresence>
           {retrievedData && (
-            <div className="retrieved-data">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="mt-6 space-y-2 rounded-md bg-gray-700 bg-opacity-50 p-4 text-white"
+            >
               <p>
                 <strong>Name:</strong> {retrievedData.name || "STUDENT CHECKOUT"}
               </p>
@@ -116,20 +126,34 @@ const UserDetails = () => {
               <p>
                 <strong>Check-Out Time:</strong>{" "}
                 {retrievedData.checkOutTime
-                  ? new Date(retrievedData.checkOutTime).toLocaleString(
-                      "en-IN",
-                      {
-                        timeZone: "Asia/Kolkata",
-                      }
-                    )
+                  ? new Date(retrievedData.checkOutTime).toLocaleString("en-IN", {
+                      timeZone: "Asia/Kolkata",
+                    })
                   : "N/A"}
               </p>
-            </div>
+            </motion.div>
           )}
-        </form>
-      </div>
-    </div>
-  );
-};
+        </AnimatePresence>
 
-export default UserDetails;
+        <AnimatePresence>
+          {toast && (
+            <motion.div
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.3 }}
+              className={`fixed right-4 top-4 rounded-md p-4 text-white ${
+                toast.type === "success" ? "bg-green-500" : "bg-red-500"
+              }`}
+            >
+              {toast.message}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  )
+}
+
+export default UserDetails
+

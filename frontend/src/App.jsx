@@ -3,10 +3,10 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-import Checkin from "./pages/CheckIn.jsx";
+import Checkin from "./pages/Checkin.jsx";
 import Userdetails from "./pages/Userdetails.jsx";
 import Checkout from "./pages/Checkout.jsx";
-import FinisherHeader from "./components/FinisherHeader"; // Import the animation component
+// import FinisherHeader from "./components/FinisherHeader"; // Import the animation component
 
 const App = () => {
   const [dashboardStats, setDashboardStats] = useState({
@@ -27,8 +27,9 @@ const App = () => {
   });
 
   return (
-    <BrowserRouter>
-      <FinisherHeader /> 
+    <div className="bg-gradient-to-br from-gray-900 to-gray-800">
+      <BrowserRouter>
+      {/* <FinisherHeader />  */}
       <Sidebar>
         <Routes>
           <Route path="/" element={<Dashboard stats={dashboardStats} />} />
@@ -39,6 +40,7 @@ const App = () => {
         </Routes>
       </Sidebar>
     </BrowserRouter>
+    </div>
   );
 };
 

@@ -51,8 +51,11 @@ const Sidebar = ({ children }) => {
                 <div className="top_section">
                     <div className="header">
                         <div className="logo-container">
-                            <div className="logo-icon">HM</div>
-                            <h1 className="logo-text">Hospitality Management</h1>
+                            {/* <div className="logo-icon">HM</div> */}
+                            <div>
+                                <img src="/rgukt.png" alt="" className='h-10 w-10 ms-1 sm:h-15 sm:w-15 sm:ms-2'/>
+                            </div>
+                            <h1 className="font-bold ms-6">Hospitality Management</h1>
                         </div>
                         {/* Close Button */}
                         <div className="close-icon" onClick={toggleSidebar}>
@@ -73,4 +76,3 @@ const Sidebar = ({ children }) => {
 };
 
 export default Sidebar;
-
