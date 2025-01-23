@@ -37,7 +37,15 @@ const Checkin = ({ setDashboardStats }) => {
       if (response.ok) {
         showToast(data.message || "Room allocated successfully!", "success")
         setAllocation(data.allocation)
-      } else {
+
+        setDashboardStats({
+          teckId: tzkid,
+          guestName: data.student?.guestName || "N/A",
+          gender,
+          checkInDate: new Date().toISOString().split('T')[0],
+        })
+      } 
+      else {
         showToast(data.message || "Error during allocation process.", "error")
       }
     } catch (error) {
