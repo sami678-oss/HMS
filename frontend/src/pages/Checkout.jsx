@@ -14,7 +14,7 @@ const Checkout = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!/^TZ2K25/.test(tzkid)) {
+    if (!/^TZ2K25/i.test(tzkid)) {
       showToast("Invalid tzkid. It must start with 'TZ2K25'.", "error")
       return
     }

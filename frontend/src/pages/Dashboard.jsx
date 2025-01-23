@@ -114,7 +114,7 @@ const Dashboard = () => {
         transition={{ duration: 0.5, delay: 0.4 }}
         className="mt-8 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg"
       >
-        <h2 className="text-2xl font-bold mb-4">All Check-Ins</h2>
+        <h2 className="text-2xl font-bold mb-4">Recent Check-Ins</h2>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -137,7 +137,9 @@ const Dashboard = () => {
                   <td className="py-2 px-4">{checkIn.teckziteId}</td>
                   <td className="py-2 px-4">{checkIn.name}</td>
                   <td className="py-2 px-4">{checkIn.gender}</td>
-                  <td className="py-2 px-4">{checkIn.checkInTime}</td>
+                  <td className="py-2 px-4">{checkIn.checkInTime ?new Date(checkIn.checkInTime).toLocaleString("en-IN", {
+                      timeZone: "Asia/Kolkata",
+                    }):"NA"}</td>
                 </motion.tr>
               ))}
             </tbody>
@@ -150,86 +152,3 @@ const Dashboard = () => {
 
 export default Dashboard
 
-
-
-// import { useState, useEffect } from "react";
-// import { motion } from "framer-motion";
-
-// const Dashboard = ({ newCheckIn }) => {
-//     const [stats, setStats] = useState({});
-//     const [recentCheckIns, setRecentCheckIns] = useState([]);
-
-//     useEffect(() => {
-//         const fetchHostelStats = async () => {
-//             try {
-//                 const response = await fetch("http://localhost:4001/api/rooms/hostel-stats");
-//                 if (!response.ok) {
-//                     throw new Error(`HTTP error! Status: ${response.status}`);
-//                 }
-
-//                 const data = await response.json();
-//                 setStats(data);
-//             } catch (error) {
-//                 console.error("Error fetching hostel stats:", error);
-//             }
-//         };
-
-//         fetchHostelStats();
-//     }, []);
-
-//     // Listen for new check-ins
-//     useEffect(() => {
-//         if (newCheckIn) {
-//             setRecentCheckIns((prev) => [...prev, newCheckIn]);
-//         }
-//     }, [newCheckIn]);
-
-//     const boysHostel = stats?.boy || {};
-//     const girlsHostel = stats?.girl || {};
-//     const totalArrivals = (boysHostel.totalStudents || 0) + (girlsHostel.totalStudents || 0);
-
-//     return (
-//         <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white p-8">
-//             {/* Rest of the component */}
-
-//             <motion.div
-//                 initial={{ opacity: 0, y: 20 }}
-//                 animate={{ opacity: 1, y: 0 }}
-//                 transition={{ duration: 0.5, delay: 0.4 }}
-//                 className="mt-8 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg"
-//             >
-//                 <h2 className="text-2xl font-bold mb-4">All Check-Ins</h2>
-//                 <div className="overflow-x-auto">
-//                     <table className="w-full">
-//                         <thead>
-//                             <tr className="border-b border-gray-700">
-//                                 <th className="py-2 px-4 text-left">TeckId</th>
-//                                 <th className="py-2 px-4 text-left">Guest Name</th>
-//                                 <th className="py-2 px-4 text-left">Gender</th>
-//                                 <th className="py-2 px-4 text-left">Check-In Date</th>
-//                             </tr>
-//                         </thead>
-//                         <tbody>
-//                             {recentCheckIns.map((checkIn, index) => (
-//                                 <motion.tr
-//                                     key={index}
-//                                     initial={{ opacity: 0, y: 20 }}
-//                                     animate={{ opacity: 1, y: 0 }}
-//                                     transition={{ duration: 0.3, delay: index * 0.1 }}
-//                                     className="border-b border-gray-700"
-//                                 >
-//                                     <td className="py-2 px-4">{checkIn.teckId}</td>
-//                                     <td className="py-2 px-4">{checkIn.guestName}</td>
-//                                     <td className="py-2 px-4">{checkIn.gender}</td>
-//                                     <td className="py-2 px-4">{checkIn.checkInDate}</td>
-//                                 </motion.tr>
-//                             ))}
-//                         </tbody>
-//                     </table>
-//                 </div>
-//             </motion.div>
-//         </div>
-//     );
-// };
-
-// export default Dashboard;

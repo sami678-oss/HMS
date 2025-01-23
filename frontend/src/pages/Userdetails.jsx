@@ -28,7 +28,7 @@ const UserDetails = () => {
     e.preventDefault()
     const { id } = userData
 
-    const idPattern = /^TZ2K25[A-Z0-9]*$/
+    const idPattern = /^TZ2K25[A-Z0-9]*$/i;
 
     if (!idPattern.test(id)) {
       showToast("Invalid ID! The ID should start with 'TZ2K25'", "error")
