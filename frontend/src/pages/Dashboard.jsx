@@ -5,6 +5,7 @@ const Dashboard = () => {
   const [stats, setStats] = useState({})
   const [recentCheckIns, setRecentCheckIns] = useState([])
 
+
   useEffect(() => {
     const fetchHostelStats = async () => {
       try {
@@ -123,6 +124,8 @@ const Dashboard = () => {
                 <th className="py-2 px-4 text-left">Guest Name</th>
                 <th className="py-2 px-4 text-left">Gender</th>
                 <th className="py-2 px-4 text-left">Check-In Date</th>
+                <th className="py-2 px-4 text-left">Check-Out Date</th>
+
               </tr>
             </thead>
             <tbody>
@@ -138,6 +141,9 @@ const Dashboard = () => {
                   <td className="py-2 px-4">{checkIn.name}</td>
                   <td className="py-2 px-4">{checkIn.gender}</td>
                   <td className="py-2 px-4">{checkIn.checkInTime ?new Date(checkIn.checkInTime).toLocaleString("en-IN", {
+                      timeZone: "Asia/Kolkata",
+                    }):"NA"}</td>
+                    <td className="py-2 px-4">{checkIn.checkOutTime ?new Date(checkIn.checkOutTime).toLocaleString("en-IN", {
                       timeZone: "Asia/Kolkata",
                     }):"NA"}</td>
                 </motion.tr>

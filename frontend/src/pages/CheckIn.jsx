@@ -96,7 +96,7 @@ const Checkin = ({ setDashboardStats }) => {
             whileTap={{ scale: 0.95 }}
             className="w-full rounded-md bg-blue-600 py-2 font-medium text-white transition-colors hover:bg-blue-700"
           >
-            Check In
+            Allocate Room
           </motion.button>
         </form>
 
