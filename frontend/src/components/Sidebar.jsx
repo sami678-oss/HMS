@@ -4,13 +4,13 @@ import {
     FaBars,
     FaUserAlt,
     FaRegClock,
-    FaTimes
+    FaTimes,
+    FaBed
 } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = ({ children }) => {
-    const [isOpen, setIsOpen] = useState(true); // Sidebar is open by default for desktop
-
+    const [isOpen, setIsOpen] = useState(true); 
     const menuItem = [
         {
             path: "/",
@@ -31,6 +31,11 @@ const Sidebar = ({ children }) => {
             path: "/checkout",
             name: "CheckOut",
             icon: <FaRegClock />
+        },
+        {
+            path: "/allocateroom",
+            name: "AllocateRoom",
+            icon: < FaBed/>
         },
     ];
 
